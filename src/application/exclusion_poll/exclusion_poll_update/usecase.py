@@ -17,9 +17,9 @@ class ExclusionPollUpdateUsecase(Usecase):
     async def execute(self) -> bool:
         """returns True if user has been excluded and False if not"""
         if self.exclude:
-            exclusion_poll = await self.exclusion_poll_repo.downvote(id=self.candidate_id)
-        else:
             exclusion_poll = await self.exclusion_poll_repo.upvote(id=self.candidate_id)
+        else:
+            exclusion_poll = await self.exclusion_poll_repo.downvote(id=self.candidate_id)
 
         if exclusion_poll.votes >= exclusion_poll.votes_required:
             await self.exclusion_poll_repo.delete(exclusion_poll.exclusion_candidate_id)

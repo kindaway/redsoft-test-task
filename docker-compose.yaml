@@ -17,24 +17,26 @@ services:
   app:
     container_name: "app"
     build: .
-#    environment:
-#      SETTINGS: deploy/backend
-    expose:
-      - "8000"
+    environment:
+      SETTINGS: build/settings
+    ports:
+      - "8000:8000"
     depends_on:
       database:
         condition: service_healthy
+      alembic:
+        condition: service_started
 
 
-#  alembic:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile
-#      target: development
-#    command: [ "alembic", "upgrade", "head" ]
-#    depends_on:
-#      database:
-#        condition: service_healthy
+  alembic:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    command: [ "alembic", "upgrade", "head" ]
+    depends_on:
+      database:
+        condition: service_healthy
 
 volumes:
   db:

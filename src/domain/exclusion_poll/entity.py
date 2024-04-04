@@ -13,8 +13,8 @@ class ExclusionPoll(DomainEntity):
 
     def validate(self) -> None:
         errors = []
-        if self.votes_required <= 0:
-            errors.append(BusinessRuleBrokenError("required votes cannot be equal or less than 0"))
+        # if self.votes_required <= 0:
+        #     errors.append(BusinessRuleBrokenError("required votes cannot be equal or less than 0"))
         if not self.reason:
             errors.append(BusinessRuleBrokenError("can't exclude a member without a reason"))
 

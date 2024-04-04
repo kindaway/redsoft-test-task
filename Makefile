@@ -10,6 +10,9 @@ build:
 run:
 	@docker compose up --remove-orphans
 
+rebuild:
+	@docker compose up --force-recreate --build
+
 run-detached:
 	@docker compose up -d --remove-orphans
 

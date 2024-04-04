@@ -18,13 +18,13 @@ RUN poetry config virtualenvs.create false && \
 
 COPY alembic.ini /alembic.ini
 COPY /src /src
-COPY deploy /deploy
+COPY /build /build
 
 ENV PYTHONPATH="/"
-ENV SETTINGS="deploy/backend"
-CMD ["python3", "src/main.py"]
+ENV SETTINGS="build/settings"
+CMD ["python3", "-m", "src.presentation.api"]
 
 FROM development as production
 RUN poetry install --without dev --sync --no-cache
-CMD ["python3", "src/main.py"]
+CMD ["python3", "-m", "src.presentation.api"]
 
