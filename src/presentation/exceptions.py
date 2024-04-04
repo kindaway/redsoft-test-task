@@ -1,0 +1,2 @@
+class PresentationException(Exception):
+    pass

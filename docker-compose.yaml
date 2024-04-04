@@ -1,0 +1,41 @@
+services:
+  database:
+    container_name: "database"
+    image: postgres:alpine3.19
+    env_file:
+      - ./build/database.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - db:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    container_name: "app"
+    build: .
+#    environment:
+#      SETTINGS: deploy/backend
+    expose:
+      - "8000"
+    depends_on:
+      database:
+        condition: service_healthy
+
+
+#  alembic:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#      target: development
+#    command: [ "alembic", "upgrade", "head" ]
+#    depends_on:
+#      database:
+#        condition: service_healthy
+
+volumes:
+  db:
+    driver: local

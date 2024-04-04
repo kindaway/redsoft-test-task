@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "redsoft-interview"
+version = "0.1.0"
+description = ""
+authors = ["kindaway <63051555+kindaway@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.110.0"
+uvicorn = "^0.29.0"
+dynaconf = "^3.2.5"
+asyncpg = "^0.29.0"
+pytest = "^8.1.1"
+pydantic = "^2.6.4"
+sqlalchemy = "^2.0.29"
+alembic = "^1.13.1"
+black = "^24.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
